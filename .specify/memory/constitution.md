@@ -1,50 +1,42 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+- Version change: template → 1.0.0
+- Modified principles: [PRINCIPLE_1_NAME] → Security by Default; [PRINCIPLE_2_NAME] → Simplicity Before Scope; [PRINCIPLE_3_NAME] → Testable, Maintainable Design; [PRINCIPLE_4_NAME] → Configuration and Integration Discipline; [PRINCIPLE_5_NAME] → Incremental Delivery and Quality Gates
+- Added sections: Additional Constraints, Development Workflow
+- Removed sections: None
+- Templates requiring updates: [.specify/templates/plan-template.md] ⚠ pending, [.specify/templates/spec-template.md] ⚠ pending, [.specify/templates/tasks-template.md] ⚠ pending
+- Follow-up TODOs: None
+-->
+
+# RSS Feed Reader Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Security by Default
+All new features MUST treat user-supplied URLs and third-party feed content as untrusted input. The application MUST avoid unsafe rendering, must not execute arbitrary content, and MUST keep future feed-processing changes aligned with the principle of least privilege. This rule is non-negotiable because the app may eventually process external feeds and content from the internet.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Simplicity Before Scope
+The MVP MUST remain focused on adding subscriptions and displaying the subscription list. Any feature that expands beyond that scope MUST be deferred to a later phase unless the team explicitly documents why it is required for the current delivery. Implementation MUST use the simplest viable approach for the current milestone, including in-memory storage and minimal UI behavior when that is sufficient.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Testable, Maintainable Design
+Every feature MUST be implemented with clear separation between UI, API, and data concerns so it can be reasoned about and verified independently. New behavior MUST be covered by automated tests or a documented local verification step before it is considered complete, and code MUST avoid hidden state, duplicated logic, and brittle coupling between frontend and backend components.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Configuration and Integration Discipline
+The ASP.NET Core backend and Blazor frontend MUST agree on API URLs, ports, and CORS settings before work is considered ready for testing. Configuration values MUST be read from configuration files or environment settings rather than hardcoded, and routing or startup issues MUST be resolved before feature work proceeds.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Incremental Delivery and Quality Gates
+The project MUST be delivered in small, verifiable increments. Each milestone MUST include a clean build or local smoke test, and the team MUST stop and fix regressions in build, routing, or runtime behavior before moving on to the next step. This keeps the MVP practical, reduces rework, and makes the project easier to extend later.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Additional Constraints
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+The RSS reader is a local proof-of-concept application for a single user, so the current implementation MUST prioritize clarity and speed over polish. The technology choices in this repository MUST remain compatible with the planned ASP.NET Core Web API and Blazor WebAssembly architecture, and any future enhancements MUST preserve that separation of concerns rather than introducing a tightly coupled monolith.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Development Workflow
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+All work MUST follow the current MVP-first plan: build the minimal subscription-management experience first, verify it locally, and only then introduce additional capabilities such as feed fetching, persistence, or richer UI behavior. Changes MUST be reviewed for scope discipline, configuration correctness, and quality impact before they are merged.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes informal practices and sets the baseline for implementation decisions in this repository. Any amendment MUST be documented, reviewed for impact on existing work, and reflected in the relevant specification and planning artifacts before it is adopted. Compliance with these principles is expected in all implementation, review, and release activities.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-06-29 | **Last Amended**: 2026-06-29
